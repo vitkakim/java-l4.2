@@ -1,9 +1,6 @@
 package ru.netology.domain;
 
-import lombok.Data;
-
-
-public class Ticket implements Comparable<Ticket>{
+public class Ticket {
     private int id;
     private int price;
     private String fromAirport;
@@ -22,7 +19,7 @@ public class Ticket implements Comparable<Ticket>{
     }
 
     public boolean matches(String from, String to) {
-        if (fromAirport.contains(from) && toAirport.contains(to) ) {
+        if (fromAirport.contains(from) && toAirport.contains(to)) {
             return true;
         }
         return false;
@@ -32,17 +29,15 @@ public class Ticket implements Comparable<Ticket>{
         return id;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public void setFromAirport(String fromAirport) {
         this.fromAirport = fromAirport;
     }
 
     public void setToAirport(String toAirport) {
         this.toAirport = toAirport;
-    }
-
-    @Override
-    public int compareTo(Ticket o) {
-        Ticket ticket = (Ticket) o;
-        return this.price - ticket.price;
     }
 }

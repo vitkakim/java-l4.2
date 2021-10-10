@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.NotFoundException;
 import ru.netology.domain.Ticket;
+import ru.netology.domain.TicketByPriceAscComparator;
 import ru.netology.repository.TicketRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +24,7 @@ class TicketManagerTest {
 
     TicketRepository repository = new TicketRepository();
     TicketManager manager = new TicketManager(repository);
+    TicketByPriceAscComparator comparator = new TicketByPriceAscComparator();
 
     @BeforeEach
     public void setUp() {
@@ -47,14 +49,14 @@ class TicketManagerTest {
 
     @Test
     void shouldFindTicket() {
-        Ticket[] actual = manager.searchBy("LED", "VKO");
+        Ticket[] actual = manager.searchBy("LED", "VKO", comparator);
         Ticket[] expected = new Ticket[]{ticket5, ticket3, ticket1, ticket7};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldNotFindTicket() {
-        Ticket[] actual = manager.searchBy("LED", "AAQ");
+        Ticket[] actual = manager.searchBy("LED", "AAQ", comparator);
         Ticket[] expected = new Ticket[0];
         assertArrayEquals(expected, actual);
     }
